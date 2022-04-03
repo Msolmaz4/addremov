@@ -6,9 +6,15 @@ import Header from './components/Header';
 function App() {
 
 const [basket ,setBasket] = useState([])
+const [total,setTotal] = useState()
 
 useEffect(()=>{
-console.log(basket)
+setTotal(
+  basket.reduce((acc,item) =>{
+    return acc+(item.amount*productItem.find(xr=>xr.id === item.id).price)
+  },0)
+)
+
 },[basket])
 
 
@@ -22,9 +28,12 @@ const {productItem} =data
        key={prod.id}
        basket ={basket}
        setBasket={setBasket}
-       prod={prod} />
+       prod={prod}
+       
+       />
      ))
    }
+   <div>{total}</div>
     </div>
   );
 }

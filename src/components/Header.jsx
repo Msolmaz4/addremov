@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Header = ({prod,setBasket,basket}) => {
-    
+
     const bastItem = basket.find(item =>item.id === prod.id)
 
 const handleAdd =()=>{
@@ -20,6 +20,25 @@ const handleAdd =()=>{
 }
 
 
+const handleRemove =()=>{
+
+    const currentBasket = basket.find(item =>item.id === prod.id)
+    const sta =basket.filter(item =>item.id !==prod.id)
+    currentBasket.amount -= 1
+    if(currentBasket === 0){
+        setBasket([...sta])
+    }else{
+        setBasket([...sta,currentBasket])
+    }
+
+     
+
+
+
+}
+
+
+
   return (
     <div>
 
@@ -28,7 +47,7 @@ const handleAdd =()=>{
 <div>
     <button onClick={handleAdd}>arti</button>
     <span>{bastItem && bastItem.amount || 0}</span>
-    <button>eksi</button>
+    <button disabled={!bastItem} onClick={handleRemove}>eksi</button>
 </div>
 
     
